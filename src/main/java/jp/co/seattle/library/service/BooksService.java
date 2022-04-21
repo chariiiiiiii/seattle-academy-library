@@ -69,7 +69,21 @@ public class BooksService {
                 + bookInfo.getThumbnailUrl() + "',"
                 + "now(),"
                 + "now())";
-
+      
         jdbcTemplate.update(sql);
-    }
+    }      
+       
+    public void deleteBook(Integer bookId) {
+
+        String sql = "delete from books where id = "+ bookId +";";
+      
+        jdbcTemplate.update(sql);
+    }      
+   
+        	
+    
+    
+        	
+    
+    
 }
