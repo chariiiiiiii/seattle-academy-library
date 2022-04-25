@@ -55,7 +55,13 @@ public class BooksService {
 
         return bookDetailsInfo;
     }
-
+    public BookDetailsInfo detailsBook() {
+    	String sql = "select * from books where id = (select max(id) from books);";
+    	
+    	BookDetailsInfo latestBookDetailsInfo = jdbcTemplate.queryForObject(sql, new BookDetailsInfoRowMapper());
+    	return latestBookDetailsInfo;
+    }
+    
     /**
      * 書籍を登録する
      *
@@ -63,10 +69,13 @@ public class BooksService {
      */
     public void registBook(BookDetailsInfo bookInfo) {
 
-        String sql = "INSERT INTO books (title, author,publisher,thumbnail_name,thumbnail_url,reg_date,upd_date) VALUES ('"
+        String sql = "INSERT INTO books (title, author,publisher,thumbnail_name,thumbnail_url,publish_date,colum,isbn,reg_date,upd_date) VALUES ('"
                 + bookInfo.getTitle() + "','" + bookInfo.getAuthor() + "','" + bookInfo.getPublisher() + "','"
                 + bookInfo.getThumbnailName() + "','"
-                + bookInfo.getThumbnailUrl() + "',"
+                + bookInfo.getThumbnailUrl() + "','"
+                + bookInfo.getPublishDate() + "','"
+                + bookInfo.getColum() + "','"
+                + bookInfo.getIsbn() + "',"
                 + "now(),"
                 + "now())";
       

@@ -98,7 +98,7 @@ public class AddBooksController {
         
         boolean errorRequired = title.isEmpty() || author.isEmpty() || publisher.isEmpty() || publishDate.isEmpty();
         boolean errorPublishDate = ! (publishDate.length() == 8 && publishDate.matches("^[0-9]+$"));
-        boolean errorISBN = !(isbn.length() == 10 || isbn.length() == 13);
+        boolean errorISBN = !(isbn.length() == 10 || isbn.length() == 13 || isbn.length() == 0);
         
         //必須項目
         if(errorRequired) {
