@@ -55,7 +55,7 @@ public class BooksService {
 
         return bookDetailsInfo;
     }
-    public BookDetailsInfo detailsBook() {
+    public BookDetailsInfo getbook() {
     	String sql = "select * from books where id = (select max(id) from books);";
     	
     	BookDetailsInfo latestBookDetailsInfo = jdbcTemplate.queryForObject(sql, new BookDetailsInfoRowMapper());

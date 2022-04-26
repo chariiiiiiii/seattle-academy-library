@@ -67,10 +67,10 @@ public class AddBooksController {
         BookDetailsInfo bookInfo = new BookDetailsInfo();
         bookInfo.setTitle(title);
         bookInfo.setAuthor(author);
-        bookInfo.setPublisher(publisher);   
-		bookInfo.setIsbn(isbn);
-		bookInfo.setPublishDate(publishDate);
-		bookInfo.setColum(colum);
+        bookInfo.setPublisher(publisher);
+        bookInfo.setIsbn(isbn);
+        bookInfo.setPublishDate(publishDate);
+        bookInfo.setColum(colum);
 
         // クライアントのファイルシステムにある元のファイル名を設定する
         String thumbnail = file.getOriginalFilename();
@@ -102,7 +102,7 @@ public class AddBooksController {
         
         //必須項目
         if(errorRequired) {
-        list.add("必須項目を入力してください");
+        	list.add("必須項目を入力してください");
         	
         }
         
