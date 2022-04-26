@@ -1,5 +1,7 @@
 package jp.co.seattle.library.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -16,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import jp.co.seattle.library.dto.BookDetailsInfo;
 import jp.co.seattle.library.service.BooksService;
 import jp.co.seattle.library.service.ThumbnailService;
-
+         
 /**
  * Handles requests for the application home page.
  */
@@ -44,6 +46,8 @@ public class AddBooksController {
      * @param publisher 出版社
      * @param file サムネイルファイル
      * @param model モデル
+     * @param isbn 
+     * @param colum 
      * @return 遷移先画面
      */
     @Transactional
@@ -53,6 +57,9 @@ public class AddBooksController {
             @RequestParam("author") String author,
             @RequestParam("publisher") String publisher,
             @RequestParam("thumbnail") MultipartFile file,
+            @RequestParam("isbn") String isbn,
+            @RequestParam("colum") String colum,
+            @RequestParam("publish_date") String publishDate,
             Model model) {
         logger.info("Welcome insertBooks.java! The client locale is {}.", locale);
 
@@ -61,6 +68,9 @@ public class AddBooksController {
         bookInfo.setTitle(title);
         bookInfo.setAuthor(author);
         bookInfo.setPublisher(publisher);
+        bookInfo.setIsbn(isbn);
+        bookInfo.setPublishDate(publishDate);
+        bookInfo.setColum(colum);
 
         // クライアントのファイルシステムにある元のファイル名を設定する
         String thumbnail = file.getOriginalFilename();
@@ -83,13 +93,51 @@ public class AddBooksController {
                 return "addBook";
             }
         }
+        
+        List<String> list = new ArrayList<String>();
+        
+        boolean errorRequired = title.isEmpty() || author.isEmpty() || publisher.isEmpty() || publishDate.isEmpty();
+        boolean errorPublishDate = ! (publishDate.length() == 8 && publishDate.matches("^[0-9]+$"));
+        boolean errorISBN = !(isbn.length() == 10 || isbn.length() == 13 || isbn.length() == 0);
+        
+        //必須項目
+        if(errorRequired) {
+        	list.add("必須項目を入力してください");
+        	
+        }
+        
+        //出版日
+        if(errorPublishDate) {
+        	list.add("出版日は半角英数字の形式で入力してください");
+        	
+        }
 
+        //ISBN
+        if(errorISBN) {
+        	list.add("ISBNの桁数または半角英数字が正しくありません");
+        	
+        }
+        
+   
+        if(errorRequired || errorPublishDate || errorISBN) {
+        	model.addAttribute("bookDetailsInfo",bookInfo);
+        	model.addAttribute("errorlists",list);
+        	return "addBook";
+        }
+        
+        
+        
         // 書籍情報を新規登録する
         booksService.registBook(bookInfo);
 
         model.addAttribute("resultMessage", "登録完了");
+   
 
         // TODO 登録した書籍の詳細情報を表示するように実装
+        
+            model.addAttribute("bookDetailsInfo", booksService.detailsBook());
+            
+         
         //  詳細画面に遷移する
         return "details";
     }
