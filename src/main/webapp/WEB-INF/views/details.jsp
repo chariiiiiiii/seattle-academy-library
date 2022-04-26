@@ -67,13 +67,25 @@
                 <div>
                     <span>説明文</span>
                     <p>${bookDetailsInfo.colum}</p>
-                     </div> 
-        </div>
-        <div class="edtDelBookBtn_box">
+                </div> 
+            </div> 
+       </div> 
+       
+         <div class="edtDelBookBtn_box">
+            <form method="post" action="">
+                <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_rentBook">借りる</button> 
+                </form>
+            <form method="post" action="">    
+                <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_returnBook">返す</button> 
+                </form>
+            <form method="post" action="">
+                <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_editBook">編集</button>
+                </form>
             <form method="post" action="deleteBook">
                 <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_deleteBook">削除</button>
             </form>
         </div>
+        
     </main>
 </body>
 </html>
