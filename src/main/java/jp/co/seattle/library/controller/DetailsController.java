@@ -42,17 +42,5 @@ public class DetailsController {
         model.addAttribute("bookDetailsInfo", bookdService.getBookInfo(bookId));
 
         return "details";
-        
-        /**
-         * 編集ボタンから編集画面に遷移
-         * @param model
-         * @return
-         */
-        @RequestMapping(value = "/edit", method = RequestMethod.GET)
-        public String transitionedit(Model model) {
-            model.addAttribute("bookList", booksService.getBookList());
-            return "edit";
-        
-        
     }
 }
