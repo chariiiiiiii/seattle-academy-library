@@ -95,6 +95,27 @@ public class BooksService {
       
         jdbcTemplate.update(sql);
     }      
+    
+    
+    
+    
+    /**
+     * 書籍を更新する
+     *
+     * @param bookInfo 書籍情報
+     */
+    public void editbook(BookDetailsInfo bookInfo) {
+
+        String sql = "UPDATE books set title='"+bookInfo.getTitle()+"',author='"+bookInfo.getAuthor()+"',publisher='"+bookInfo.getPublisher()
+        		+"',thumbnail_name='"+bookInfo.getThumbnailName()+"',thumbnail_url='"+bookInfo.getThumbnailUrl()
+        		+"',publish_date='"+bookInfo.getPublishDate()+"',colum='"+bookInfo.getColum()
+        		+"',isbn='"+bookInfo.getIsbn()+"',reg_date=now(),upd_date=now() where id="+bookInfo.getBookId()+";" ;
+        
+      
+        jdbcTemplate.update(sql);
+        
+    }      
+   
    
         	
     
