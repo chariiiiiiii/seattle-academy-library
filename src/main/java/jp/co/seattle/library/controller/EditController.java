@@ -30,7 +30,22 @@ public class EditController {
 	    private BooksService booksService;
 	    @Autowired
 	    private ThumbnailService thumbnailService;
-	  
+	    
+	    /**
+
+	    書籍情報を更新する
+	    @param locale ローケル情報
+	    @param title 書籍名
+	    @param author 著者名
+	    @param publisher 出版社
+	    @param publish_date 出版日
+	    @param file サムネファイル
+	    @palam model モデル
+	    @param isbn コード
+	    @param bio 説明文
+	    @param id 書籍ID
+	    @return 遷移先画面
+	    */  
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST) 
 		public String edit(Locale locale,
