@@ -116,7 +116,7 @@
                 </div>
             </div>
             <div class="addBookBtn_box">
-                <button type="submit"  value="${editInfo.bookId}"  name="bookId" class="btn_addBook">更新</button>
+                <button type="submit" name="bookId" class="btn_addBook">更新</button>
             </div>
         </form>
         
