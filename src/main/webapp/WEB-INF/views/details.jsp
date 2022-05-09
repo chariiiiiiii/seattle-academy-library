@@ -23,6 +23,9 @@
             <div class="logo">Seattle Library</div>
         </div>
         <div class="right">
+        
+        
+                
             <ul>
                 <li><a href="<%=request.getContextPath()%>/home" class="menu">Home</a></li>
                 <li><a href="<%=request.getContextPath()%>/">ログアウト</a></li>
@@ -40,6 +43,12 @@
                         </c:if> <c:if test="${bookDetailsInfo.thumbnailUrl != 'null'}">
                             <img class="book_noimg" src="${bookDetailsInfo.thumbnailUrl}">
                         </c:if> <input type="hidden" name="bookId" value="${bookDetailsInfo.bookId}">
+                        
+                    <c:if test= "${!empty errorMessage}">
+                    <div class="error"> ${errorMessage} 
+                    </div>
+                   </c:if>
+ 
                     </a>
                 </div>
             </div>
@@ -73,7 +82,7 @@
        </div> 
        
          <div class="edtDelBookBtn_box">
-            <form method="post" action="">
+            <form method="post" action="rent">
                 <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_rentBook">借りる</button> 
                 </form>
             <form method="post" action=""> 
