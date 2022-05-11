@@ -30,27 +30,27 @@ import jp.co.seattle.library.service.BooksService;
 	    @Autowired
 	    private BooksService booksService;
 	 
+	    
+	    /**
+	     * 書籍一括登録コントローラー
+	     * @param model
+	     * @return
+	     */
 		 @RequestMapping(value = "/regist", method = RequestMethod.GET) //value＝actionで指定したパラメータ
 		    //RequestParamでname属性を取得
 		    public String login(Model model) {
 		        return "regist";
 		 }
-/**
- * 書籍情報を一括登録する
- * @param booksService 
- * @param locale ロケール情報
- * @param title 書籍名
- * @param author 著者名
- * @param publisher 出版社
- * @param file サムネイルファイル
- * @param model モデル
- * @param isbn 
- * @param colum 
- * @return 遷移先画面
- */
-	
-	
-	
+		 
+		 
+		 /**
+		  * 書籍を一括登録する
+		  * @param locale
+		  * @param uploadFile
+		  * @param model
+		  * @return
+		  */
+		 
     @RequestMapping(value = "/registBook", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")	        
 	public String registbook(Locale locale,
 				@RequestParam("upload_file") MultipartFile uploadFile,
@@ -64,24 +64,15 @@ import jp.co.seattle.library.service.BooksService;
 	      
 	 
 	try (BufferedReader br = new BufferedReader(new InputStreamReader(uploadFile.getInputStream(),StandardCharsets.UTF_8))){
-	String line;
+		String line;
 	 
 		int count = 1;
 		
 	 	while((line = br.readLine()) != null) {
 		 
-	 		
-	 		
-	 		final String[] split = line.split(",",-1);
-	 		final  BookDetailsInfo bookInfo= new BookDetailsInfo();
-	 		
-	 		
-	 		bookInfo.setTitle(split[0]);
-	 		bookInfo.setAuthor(split[1]);
-	 		bookInfo.setPublisher(split[2]);
-	 		bookInfo.setPublishDate(split[3]);
-	 		bookInfo.setIsbn(split[4]);
-	 		bookInfo.setColum(split[5]);
+
+	 		String[] split = line.split(",",-1);
+	 		BookDetailsInfo bookInfo= new BookDetailsInfo();
 	 		
 	 		boolean errorRequired = split[0].isEmpty() || split[1].isEmpty() || split[2].isEmpty() ||split[3].isEmpty();
 	 		boolean errorPublishDate = ! (split[3].length() == 8 && split[3].matches("^[0-9]+$"));
@@ -90,13 +81,21 @@ import jp.co.seattle.library.service.BooksService;
 	 		//必須項目
 	 		if(errorRequired||errorPublishDate||errorISBN) {
 	 			list1.add(count+"行目の書籍登録でエラーが起きました。");
+	 			
 	 		}else{
+	 			bookInfo.setTitle(split[0]);
+		 		bookInfo.setAuthor(split[1]);
+		 		bookInfo.setPublisher(split[2]);
+		 		bookInfo.setPublishDate(split[3]);
+		 		bookInfo.setIsbn(split[4]);
+		 		bookInfo.setColum(split[5]);
+		 		
 	 			list2.add(bookInfo);
 	 		}
 	 		count ++;
 	 	}
 	 		
-	 		if(list2.isEmpty()) {model.addAttribute("errorMessage","CSVに書籍情報がありません。");
+	 		if(list2.size() == 0) {model.addAttribute("errorMessage","CSVに書籍情報がありません。");
 	 		return "regist";
 
 	 		}
