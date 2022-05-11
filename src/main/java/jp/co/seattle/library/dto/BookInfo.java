@@ -39,7 +39,7 @@ public class BookInfo {
         this.publishDate = publishDate;
         this.thumbnail = thumbnail;
         this.isbn = isbn;
-        this.colum = colum
+        this.colum = colum;
     }
 
 }
