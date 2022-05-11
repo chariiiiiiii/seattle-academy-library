@@ -26,7 +26,11 @@ public class RentbooksService {
 	         jdbcTemplate.update(sql);
 	     }
 
-	    
+	    /**
+	     * 書籍のカウント
+	     * @param bookId
+	     * @return
+	     */
 	    public Integer countRentBook(Integer bookId) {
 	            
 	        	String sql = "select count (book_id) from rentbooks where book_id = "  + bookId ;
