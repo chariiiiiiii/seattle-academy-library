@@ -45,14 +45,10 @@ class RentController {
         Integer rentcount = rentbooksService.countRentBook(bookId);
         
         
-        if (count < rentcount) {
-        	model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
-			
-		}else {
-			model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
+        if (count == rentcount) {
 			model.addAttribute("errorMessage","貸出し済みです。");
-				
 		}
+        model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
         return "details";
 		
 	}
