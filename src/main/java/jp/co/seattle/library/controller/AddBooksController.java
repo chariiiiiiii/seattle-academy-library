@@ -135,7 +135,7 @@ public class AddBooksController {
 
         // TODO 登録した書籍の詳細情報を表示するように実装
         
-            model.addAttribute("bookDetailsInfo", booksService.detailsBook());
+            model.addAttribute("bookDetailsInfo", booksService.getbook());
             
          
         //  詳細画面に遷移する
