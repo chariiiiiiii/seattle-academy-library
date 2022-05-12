@@ -72,10 +72,11 @@ public class AccountController {
         		 model.addAttribute("errorPassword","パスワードが一致しません。");
         		 return "createAccount";
         	}
-        	}else {
+        	
+        }else {
         		
-       		 	model.addAttribute("errorPassword","パスワードは8文字以上かつ半角英数字に設定してください。");
-       		 	return "createAccount";
+       		 model.addAttribute("errorPassword","パスワードは8文字以上かつ半角英数字に設定してください。");
+       		 return "createAccount";
         	}
         }
         
