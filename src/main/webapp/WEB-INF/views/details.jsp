@@ -39,19 +39,9 @@
                             <img class="book_noimg" src="resources/img/noImg.png">
                         </c:if> <c:if test="${bookDetailsInfo.thumbnailUrl != 'null'}">
                             <img class="book_noimg" src="${bookDetailsInfo.thumbnailUrl}">
-<<<<<<< HEAD
-                        </c:if> <input type="hidden" name="bookId" value="${bookDetailsInfo.bookId}">
-                        
-                    <c:if test= "${!empty errorMessage}">
-                    <div class="error"> ${errorMessage}
-                    </div>
-                   </c:if>
- 
-=======
                         </c:if> <input type="hidden" name="bookId" value="${bookDetailsInfo.bookId}"> <c:if test="${!empty errorMessage}">
                             <div class="error">${errorMessage}</div>
                         </c:if>
->>>>>>> develop
                     </a>
                 </div>
             </div>
@@ -84,19 +74,11 @@
         </div>
         <div class="edtDelBookBtn_box">
             <form method="post" action="rent">
-<<<<<<< HEAD
-                <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_rentBook">借りる</button> 
-                </form>
-            <form method="post" action="return"> 
-                <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_returnBook">返す</button> 
-                </form>
-=======
                 <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_rentBook">借りる</button>
             </form>
-            <form method="post" action="">
+            <form method="post" action="return">
                 <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_returnBook">返す</button>
             </form>
->>>>>>> develop
             <form method="post" action="edit">
                 <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_editBook">編集</button>
             </form>
