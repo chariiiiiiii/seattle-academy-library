@@ -72,4 +72,15 @@ public class BooksService {
 
         jdbcTemplate.update(sql);
     }
+    
+    public static BookDetailsInfo deleteBook(int bookId) {
+
+        String sql = "delete from books where id ="+bookId;
+
+		return null;
+    }
 }
+    
+    
+    
+    
