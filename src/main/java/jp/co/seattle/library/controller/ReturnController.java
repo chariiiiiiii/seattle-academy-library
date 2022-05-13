@@ -22,7 +22,13 @@ public class ReturnController {
 		    private BooksService booksService;
 		 @Autowired
 		    private RentbooksService rentbooksService;
-		    
+		 /**
+		  *書籍の返却    
+		  * @param locale
+		  * @param bookId
+		  * @param model
+		  * @return
+		  */
 		 
 		    @RequestMapping(value = "/return", method = RequestMethod.POST) 
 		public String rent(Locale locale,
@@ -35,16 +41,15 @@ public class ReturnController {
 	 
 	        if (count > 0) {
 	        	rentbooksService.returnbook(bookId);
-	        	model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
-	        	return "details";
+	
 				
 			}else {
-				model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
 				model.addAttribute("errorMessage","貸出しされていません。");
-				return "details";
 			
 				
 			}
+	        model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
+        	return "details";
 			
 		}
 		  
