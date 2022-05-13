@@ -25,6 +25,14 @@ class RentController {
 	    private RentbooksService rentbooksService;
 	    
 	 
+	 /**
+	  * 書籍を貸出する
+	  * @param locale
+	  * @param bookId
+	  * @param model
+	  * @return
+	  */
+	 
 	    @RequestMapping(value = "/rent", method = RequestMethod.POST) 
 	public String rent(Locale locale,
 	            @RequestParam("bookId") int bookId,
@@ -34,20 +42,14 @@ class RentController {
 		
         Integer count = rentbooksService.countRentBook(bookId); 
         rentbooksService.rentbookInfo(bookId);
-        Integer count2 = rentbooksService.countRentBook(bookId);
+        Integer rentcount = rentbooksService.countRentBook(bookId);
         
         
-        if (count < count2) {
-        	model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
-        	return "details";
-			
-		}else {
-			model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
+        if (count == rentcount) {
 			model.addAttribute("errorMessage","貸出し済みです。");
-			return "details";
-		
-			
 		}
+        model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
+        return "details";
 		
 	}
 	  
