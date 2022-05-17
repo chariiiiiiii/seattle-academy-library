@@ -41,10 +41,8 @@ public class DeleteBookController {
 		logger.info("Welcome delete! The client locale is {}.", locale);
 
 		Integer count = rentbooksService.countRentBook(bookId);
-		rentbooksService.rentbookInfo(bookId);
-		Integer count2 = rentbooksService.countRentBook(bookId);
 
-		if (count < count2) {
+		if (count == 0) {
 			booksService.deleteBook(bookId);
 			model.addAttribute("bookList", booksService.getBookList());
 			return "home";
