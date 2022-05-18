@@ -26,7 +26,6 @@ public class BookDetailsInfo {
     private String thumbnailName;
     private String isbn;
     private String colum;
-    private int rentBookId;
     private String status;
 
     public BookDetailsInfo() {
@@ -34,7 +33,7 @@ public class BookDetailsInfo {
     }
 
     public BookDetailsInfo(int bookId, String title, String author, String publisher,
-            String thumbnailUrl, String thumbnailName,String isbn,String colum, String publishDate,int rentBookId,String status) {
+            String thumbnailUrl, String thumbnailName,String isbn,String colum, String publishDate,String status) {
         this.bookId = bookId;
         this.title = title;
         this.author = author;
