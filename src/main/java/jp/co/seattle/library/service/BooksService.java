@@ -48,8 +48,8 @@ public class BooksService {
     public BookDetailsInfo getBookInfo(int bookId) {
 
         // JSPに渡すデータを設定する
-        String sql = "SELECT *, CASE WHEN book_id > 0 THEN '貸出し中' ELSE '貸出し可' end "
-        		+ "FROM books left join rentbooks on books.id = rentbooks.book_id where books.id ="+ bookId;
+        String sql = "SELECT *, CASE WHEN rentbook_id > 0 THEN '貸出し中' ELSE '貸出し可' end "
+        		+ "FROM books left join rentbooks on books.id = rentbooks.rentbook_id where books.id ="+ bookId;
 
         BookDetailsInfo bookDetailsInfo = jdbcTemplate.queryForObject(sql, new BookDetailsInfoRowMapper());
  
@@ -63,8 +63,8 @@ public class BooksService {
      * @return 書籍情報
      */
     public BookDetailsInfo getbook() {
-    	String sql = " SELECT *, CASE WHEN book_id > 0 THEN '貸出し中' ELSE '貸出し可' end "
-    			+"FROM books left join rentbooks on books.id = rentbooks.book_id where books.id = (select max(id) from books);";
+    	String sql = " SELECT *, CASE WHEN rentbook_id > 0 THEN '貸出し中' ELSE '貸出し可' end "
+    			+"FROM books left join rentbooks on books.id = rentbooks.rentbook_id where books.id = (select max(id) from books);";
     	
     	BookDetailsInfo latestBookDetailsInfo = jdbcTemplate.queryForObject(sql, new BookDetailsInfoRowMapper());
     	return latestBookDetailsInfo;

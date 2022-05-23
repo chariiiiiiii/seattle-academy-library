@@ -14,44 +14,41 @@ import org.springframework.web.bind.annotation.RequestParam;
 import jp.co.seattle.library.service.BooksService;
 import jp.co.seattle.library.service.RentbooksService;
 
-
 @Controller
 class RentController {
 	final static Logger logger = LoggerFactory.getLogger(RentbooksService.class);
-	
-	 @Autowired
-	    private BooksService booksService;
-	 @Autowired
-	    private RentbooksService rentbooksService;
-	    
-	 
-	 /**
-	  * 書籍を貸出する
-	  * @param locale
-	  * @param bookId
-	  * @param model
-	  * @return
-	  */
-	 
-	    @RequestMapping(value = "/rent", method = RequestMethod.POST) 
-	public String rent(Locale locale,
-	            @RequestParam("bookId") int bookId,
-	          Model model) {
-		logger.info("Welcome editControler.java! The client locale is {}.", locale);
-		
-		
-        Integer count = rentbooksService.countRentBook(bookId); 
-        rentbooksService.rentbookInfo(bookId);
-        Integer rentcount = rentbooksService.countRentBook(bookId);
-        
-        
-        if (count == rentcount) {
-			model.addAttribute("errorMessage","貸出し済みです。");
-		}
-        model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
-        return "details";
-		
-	}
-	  
-}
 
+	@Autowired
+	private BooksService booksService;
+	@Autowired
+	private RentbooksService rentbooksService;
+
+	/**
+	 * 書籍を貸出する
+	 * 
+	 * @param locale
+	 * @param bookId
+	 * @param model
+	 * @return
+	 */
+
+	@RequestMapping(value = "/rent", method = RequestMethod.POST)
+	public String rent(Locale locale, @RequestParam("bookId") int bookId, Model model) {
+		logger.info("Welcome editControler.java! The client locale is {}.", locale);
+
+		Integer count = rentbooksService.countRentBook(bookId);
+		rentbooksService.rentbookInfo(bookId);
+		Integer rentcount = rentbooksService.countRentBook(bookId);
+
+		if (count == rentcount) {
+			model.addAttribute("errorMessage", "貸出し済みです。");
+		}
+
+		rentbooksService.returndeletebook(bookId);
+		model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
+
+		return "details";
+
+	}
+
+}

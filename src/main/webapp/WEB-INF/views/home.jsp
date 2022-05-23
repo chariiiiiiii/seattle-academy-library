@@ -31,7 +31,9 @@
                 <input type="search" class="search1" name="searchword"> <input type="submit" class="after" value="検索">
             </form>
         </div>
-        <a href="<%=request.getContextPath()%>/addBook" class="btn_add_book">書籍の追加</a> <a href="<%=request.getContextPath()%>/regist" class="btn_bulk_book">一括登録</a>
+        <a href="<%=request.getContextPath()%>/addBook" class="btn_add_book">書籍の追加</a> 
+        <a href="<%=request.getContextPath()%>/regist" class="btn_bulk_book">一括登録</a>
+        <a href="<%=request.getContextPath()%>/history" class="btn_history_book">貸出履歴</a>
         <div class="content_body">
             <c:if test="${empty bookList}">
                 <div class="error">対象書籍がありません。</div>
