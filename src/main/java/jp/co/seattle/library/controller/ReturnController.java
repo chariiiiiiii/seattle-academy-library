@@ -1,4 +1,5 @@
 package jp.co.seattle.library.controller;
+
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -16,43 +17,39 @@ import jp.co.seattle.library.service.RentbooksService;
 @Controller
 public class ReturnController {
 
-		final static Logger logger = LoggerFactory.getLogger(RentbooksService.class);
-		
-		 @Autowired
-		    private BooksService booksService;
-		 @Autowired
-		    private RentbooksService rentbooksService;
-		 /**
-		  *書籍の返却    
-		  * @param locale
-		  * @param bookId
-		  * @param model
-		  * @return
-		  */
-		 
-		    @RequestMapping(value = "/return", method = RequestMethod.POST) 
-		public String rent(Locale locale,
-		            @RequestParam("bookId") int bookId,
-		          Model model) {
-			logger.info("Welcome editControler.java! The client locale is {}.", locale);
-			
-			
-	        Integer count = rentbooksService.countRentBook(bookId); 
-	 
-	        if (count > 0) {
-	        	rentbooksService.returnbook(bookId);
-	
-				
-			}else {
-				model.addAttribute("errorMessage","貸出しされていません。");
-			
-				
-			}
-	        model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
-        	return "details";
-			
+	final static Logger logger = LoggerFactory.getLogger(RentbooksService.class);
+
+	@Autowired
+	private BooksService booksService;
+	@Autowired
+	private RentbooksService rentbooksService;
+
+	/**
+	 * 書籍の返却
+	 * 
+	 * @param locale
+	 * @param bookId
+	 * @param model
+	 * @return
+	 */
+
+	@RequestMapping(value = "/return", method = RequestMethod.POST)
+	public String rent(Locale locale, @RequestParam("bookId") int bookId, Model model) {
+		logger.info("Welcome editControler.java! The client locale is {}.", locale);
+
+		Integer count = rentbooksService.countRentBook(bookId);
+
+		if (count > 0) {
+			rentbooksService.returnbookInfo(bookId);
+			rentbooksService.returnbook(bookId);
+
+		} else {
+			model.addAttribute("errorMessage", "貸出しされていません。");
+
 		}
-		  
+		model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
+		return "details";
+
 	}
 
-
+}
