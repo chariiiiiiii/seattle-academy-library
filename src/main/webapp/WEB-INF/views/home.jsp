@@ -26,10 +26,10 @@
     </header>
     <main>
         <div class="search">
-          <h1>Home</h1>
+            <h1>Home</h1>
             <form method="post" action="search">
-                <input type="search" class="search1" name="searchword"> <input type="submit" class="after" value="検索">
-            </form>
+                <input type="search" class="search1" name="searchword"> <input type="submit" class="after" value="検索"> <label><input type="radio" name="search" value="allsearch">書籍名で検索</label> <label><input type="radio" name="search" value="search" checked>キーワードで検索</label>
+                 </form>
         </div>
         <a href="<%=request.getContextPath()%>/addBook" class="btn_add_book">書籍の追加</a> 
         <a href="<%=request.getContextPath()%>/regist" class="btn_bulk_book">一括登録</a>

@@ -20,18 +20,26 @@ public class SearchBookController {
     private BooksService booksService;
 
     /**
-     * Homeボタンからホーム画面に戻るページ
+     * 検索フォーム
      * @param model
      * *@param searchword
      * @return
      */
     @Transactional
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public String search( @RequestParam("searchword") String searchword,Model model) {
-        model.addAttribute("bookList", booksService.searchbookList(searchword));
-        return "home";
+    public String search(@RequestParam("searchword") String searchword,
+    		@RequestParam("search") String search,
+    		Model model) {
+    	
+    	if(search.equals("allsearch")) {
+    		model.addAttribute("bookList", booksService.allsearchbookList(searchword));
+    	}
+    	else{
+    		model.addAttribute("bookList", booksService.searchbookList(searchword));
+	
+    	}
+    	 return "home";
     }
-	
-	
-
 }
+	
+	
